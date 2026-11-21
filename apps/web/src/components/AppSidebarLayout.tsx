@@ -40,6 +40,8 @@ import {
 import { BackgroundThreadAnnouncer } from "./BackgroundThreadAnnouncer";
 import { HistorySwipeNavigation } from "./HistorySwipeNavigation";
 import ThreadSidebar from "./Sidebar";
+import PersonalSidebar from "./personalSidebar/PersonalSidebar";
+import { usePersonalSidebarEnabled } from "./personalSidebar/personalSidebarToggle";
 import { SidebarBrandWidthProbe } from "./sidebar/SidebarChrome";
 import { isAppModalPage } from "./sidebar/mainAppLocation";
 import type { SidebarRouteReveal } from "./sidebar/routeReveal";
@@ -412,6 +414,7 @@ export function AppSidebarLayout({
   children: ReactNode;
   showSidebar?: boolean;
 }) {
+  const [personalSidebarEnabled] = usePersonalSidebarEnabled();
   const sidebarArea = workspaceAreaProps("sidebar", 0, "Threads");
   const [sidebarRouteReveal] = useState<SidebarRouteReveal>(() => ({
     observedKey: null,
@@ -481,7 +484,11 @@ export function AppSidebarLayout({
               }}
               style={windowControlsInsetStyle}
             >
-              <ThreadSidebar routeReveal={sidebarRouteReveal} />
+              {personalSidebarEnabled ? (
+                <PersonalSidebar />
+              ) : (
+                <ThreadSidebar routeReveal={sidebarRouteReveal} />
+              )}
               <SidebarRail onDoubleClick={resetSidebarWidth} />
             </Sidebar>
           </>

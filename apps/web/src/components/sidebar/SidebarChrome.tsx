@@ -34,6 +34,7 @@ import {
 import { Tooltip, TooltipPopup, TooltipTrigger } from "../ui/tooltip";
 import { readPullRequestListPreferences } from "../pullRequest/pullRequestListPreferences";
 import { isSidebarUtilityPage, useNavigateToMainApp } from "./mainAppLocation";
+import { PersonalSidebarToggle } from "../personalSidebar/personalSidebarToggle";
 import { SidebarThreadUndoNotice } from "./SidebarThreadUndoNotice";
 import { SidebarProviderUpdatePill } from "./SidebarProviderUpdatePill";
 import { SidebarUpdateArchitectureWarning, SidebarUpdatePill } from "./SidebarUpdatePill";
@@ -88,6 +89,9 @@ export const SidebarChromeHeader = memo(function SidebarChromeHeader({
             </Badge>
           </div>
         ) : null}
+      </div>
+      <div className="relative z-10 flex shrink-0 items-center">
+        <PersonalSidebarToggle />
       </div>
     </div>
   );
